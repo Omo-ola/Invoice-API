@@ -12,10 +12,21 @@ export interface IProduct extends Document {
   invoiceDate: string;
   paymentTerm: string;
   projectDescription: string;
+  status: string;
+  invoiceId: string;
   itemPrice: Array<{
     itemName: string;
     price: string;
     quantity: string;
     id: string;
+    total: number;
   }>;
+}
+
+export interface Iuser extends Document {
+  firstName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  isAdmin: boolean;
 }

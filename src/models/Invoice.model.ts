@@ -17,12 +17,15 @@ const invoiceSchema: Schema = new Schema(
     invoiceDate: { type: String, required: true },
     paymentTerm: { type: String, required: true },
     projectDescription: { type: String, required: true },
+    status: { type: String, required: true },
+    invoiceId: { type: String, required: true },
     itemPrice: [
       {
         itemName: { type: String, required: true },
         price: { type: String, required: true },
         quantity: { type: String, required: true },
         id: { type: String, required: true },
+        total: { type: String, required: true },
       },
     ],
   },
