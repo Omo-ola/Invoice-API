@@ -52,8 +52,6 @@ export const getOneUser = (req: Request, res: Response) => {
     });
 };
 
-
-
 //  To get this route , provide Authorization token in the header
 export const getAuthUser = async (req: any, res: Response) => {
   try {
@@ -118,7 +116,12 @@ export const login = (req: Request, res: Response) => {
         { id: user._id, email: user.email },
         `${process.env.JWT_SECRET}`
       );
-      return res.status(200).json({ message: "User found", token });
+      return res
+        .status(200)
+        .json({
+          message: "User found",
+          data: { token, isAdmin: user.isAdmin },
+        });
     })
     .catch((error) => {
       return res

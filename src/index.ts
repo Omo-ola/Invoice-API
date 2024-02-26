@@ -39,11 +39,11 @@ app.get("/", (req, res) => {
 });
 
 // Invoice Routes
-app.post("/api/invoices", createInvoice);
-app.get("/api/invoices/:id", getOneInvoice);
+app.post("/api/invoices",auth, createInvoice);
+app.get("/api/invoices/:id",getOneInvoice);
 app.get("/api/invoices", getAllInvoice);
-app.put("/api/invoices/:id", updateInvoice);
-app.delete("/api/invoices/:id", deleteInvoice);
+app.put("/api/invoices/:id", auth,updateInvoice);
+app.delete("/api/invoices/:id",auth, deleteInvoice);
 
 // User Routes
 
