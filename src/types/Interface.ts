@@ -14,6 +14,7 @@ export interface IProduct extends Document {
   projectDescription: string;
   status: string;
   invoiceId: string;
+  posterId: string;
   itemPrice: Array<{
     itemName: string;
     price: string;

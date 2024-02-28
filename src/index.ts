@@ -2,11 +2,12 @@ import bodyParser from "body-parser";
 import express from "express";
 import "dotenv/config";
 import mongoose from "mongoose";
-import cors from "cors"
+import cors from "cors";
 import {
   createInvoice,
   deleteInvoice,
   getAllInvoice,
+  getCurrentUserInvoices,
   getOneInvoice,
   updateInvoice,
 } from "./controller/invoice.controller";
@@ -39,11 +40,13 @@ app.get("/", (req, res) => {
 });
 
 // Invoice Routes
-app.post("/api/invoices",auth, createInvoice);
-app.get("/api/invoices/:id",getOneInvoice);
+app.post("/api/invoices", auth, createInvoice);
+app.get("/api/invoices/:id", getOneInvoice);
 app.get("/api/invoices", getAllInvoice);
-app.put("/api/invoices/:id", auth,updateInvoice);
-app.delete("/api/invoices/:id",auth, deleteInvoice);
+app.put("/api/invoices/:id", auth, updateInvoice);
+app.delete("/api/invoices/:id", auth, deleteInvoice);
+
+app.get("/api/user/invoices/:id", auth, getCurrentUserInvoices);
 
 // User Routes
 
@@ -55,7 +58,6 @@ app.get("/api/user/:id", getOneUser);
 app.get("/api/user", getAllUser);
 
 app.put("/api/user/:id", updateUser);
-
 
 app.delete("/api/user/:id", deleteUser);
 

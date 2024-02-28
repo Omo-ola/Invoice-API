@@ -116,12 +116,19 @@ export const login = (req: Request, res: Response) => {
         { id: user._id, email: user.email },
         `${process.env.JWT_SECRET}`
       );
-      return res
-        .status(200)
-        .json({
+      const isAdminToken = jwt.sign(
+        { isAdmin: user.isAdmin },
+        `${process.env.JWT_SECRET}`
+      );
+      if (user.isAdmin === true)
+        return res.status(200).json({
           message: "User found",
-          data: { token, isAdmin: user.isAdmin },
+          data: { token, isAdminToken, userId: user._id },
         });
+      return res.status(200).json({
+        message: "User found",
+        data: { token, userId: user._id },
+      });
     })
     .catch((error) => {
       return res

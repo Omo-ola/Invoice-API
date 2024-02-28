@@ -17,6 +17,7 @@ const invoiceSchema: Schema = new Schema(
     invoiceDate: { type: String, required: true },
     paymentTerm: { type: String, required: true },
     projectDescription: { type: String, required: true },
+    posterId: { type: mongoose.Schema.Types.ObjectId, ref: "User" },
     status: { type: String, required: true },
     invoiceId: { type: String, required: true },
     itemPrice: [
@@ -33,5 +34,5 @@ const invoiceSchema: Schema = new Schema(
 );
 
 // Create and export the model
-const InvoiceModel = mongoose.model<IProduct>("Product", invoiceSchema);
+const InvoiceModel = mongoose.model<IProduct>("Invoice", invoiceSchema);
 export default InvoiceModel;

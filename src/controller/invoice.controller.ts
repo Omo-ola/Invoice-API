@@ -2,8 +2,8 @@ import { Request, Response } from "express";
 import InvoiceModel from "../models/Invoice.model";
 import { generateId } from "../services/helper";
 
-export const createInvoice = (req: Request, res: Response) => {
-  const generateid = generateId()
+export const createInvoice = (req: any, res: Response) => {
+  const generateid = generateId();
 
   const {
     streetAddress,
@@ -36,6 +36,7 @@ export const createInvoice = (req: Request, res: Response) => {
     paymentTerm,
     projectDescription,
     itemPrice,
+    posterId: req.user.id,
     status: "pending",
     invoiceId: generateid,
   };
@@ -113,7 +114,7 @@ export const updateInvoice = (req: Request, res: Response) => {
     paymentTerm,
     projectDescription,
     itemPrice,
-    status
+    status,
   } = req.body;
   const invoiceData = {
     streetAddress,
@@ -152,4 +153,14 @@ export const deleteInvoice = (req: Request, res: Response) => {
     .catch((error) => {
       res.status(500).json({ message: "Error", error });
     });
+};
+
+export const getCurrentUserInvoices = async (req: any, res: Response) => {
+  const id = req.user.id;
+  try {
+    const invoices = await InvoiceModel.find({ posterId: id });
+    res.status(200).json({ message: "User invoices Retrieved", invoices });
+  } catch (error) {
+    res.status(500).json({ message: "Unable to fetch Invoices" });
+  }
 };
