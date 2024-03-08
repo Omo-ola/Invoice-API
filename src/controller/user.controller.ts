@@ -2,11 +2,12 @@ import { Response, Request } from "express";
 import User from "../models/User.model";
 import bcrypt from "bcrypt";
 import jwt from "jsonwebtoken";
+import { Iuser } from "../types/Interface";
 
 export const createUser = (req: Request, res: Response) => {
   const { firstName, lastName, email, password } = req.body;
 
-  User.findOne({ email }).then((user) => {
+  User.findOne({ email }).then((user:any) => {
     if (user) {
       return res.status(400).json({ message: "User with email already exist" });
     }
